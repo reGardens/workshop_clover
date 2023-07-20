@@ -1,0 +1,15 @@
+-. bikin design database, sesuai tampilan
+-. install laravel (composer create-project laravel/laravel <nama project> / laravel new <nama project>)
+-. bikin migration (php artisan make:migration create_<nama>_table)
+-. di .env nama db disesuakian
+-. bikin db di mysqlnya (mysql -u root) -> (create database <nama>;) -> (show databases;) -> (exit;)
+-. (php artisan migrate)
+-. buat model dari table yang di migrate (php artisan make:model <nama>(contoh nama: Category) )
+-. setting dummy data faker() => optional
+-. setting relasi-relasi di model
+-. buat seeder (php artisan make:seeder <nama>(contoh nama: CategorySeeder)  ) :
+  #. cara pertama manual (contoh ada di: CategorySeeder)
+  #. cara kedua pakai factory (php artisan make:factory <nama>(contoh nama: PostFactory) )
+-. lalu jalankan (php artisan db:seed / php artisan migrate:fresh --seed)
+// next week
+-. buat routing, controller ( cms, frontend )
