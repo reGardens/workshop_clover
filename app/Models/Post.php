@@ -2,15 +2,29 @@
 
 namespace App\Models;
 
+use App\Traits\GenerateSlug;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, GenerateSlug, InteractsWithMedia;
 
     protected $table = 'posts'; // optional
+    // public const ImageBanner = 'banner';
+
+    protected $fillable = [
+        'title',
+        'slug',
+        'banner',
+        'narasumber',
+        'date',
+        'description',
+        'short_description'
+    ];
 
     // buat factory sumber faker data dummy
     protected static function newFactory()

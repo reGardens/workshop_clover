@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\CardDetailController;
 use App\Http\Controllers\Front\LandingController;
 use App\Http\Controllers\Front\RegisterController;
 use App\Http\Controllers\ProfileController;
@@ -18,12 +19,21 @@ use Inertia\Inertia;
 |
 */
 
+require __DIR__ . '/backoffice/web.php';
+
 /**
  * LANDING PAGE
  * route: /
  * name: landing
  */
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+
+/**
+ * DETAIL PAGE
+ * route: /detail-page
+ * name: detail.page
+ */
+Route::get('/detail-page/{post}', [LandingController::class, 'detail'])->name('detail.page');
 
 /**
  * CREATE CONTENT
@@ -35,9 +45,30 @@ Route::get('/create', [LandingController::class, 'create'])->name('create.conten
 /**
  * CREATE CONTENT STORE
  * route: /create
- * name: create.content
+ * name: store.content
  */
 Route::post('/create', [LandingController::class, 'store'])->name('store.content');
+
+/**
+ * EDIT FORM
+ * route: /card-edit
+ * name: edit.form
+ */
+Route::get('/edit-form/{post}', [LandingController::class, 'edit'])->name('edit.form');
+
+/**
+ * UPDATE FORM
+ * route: /edit-form
+ * name: update.form
+ */
+Route::put('/edit-form/{post}', [LandingController::class, 'update'])->name('update.form');
+
+/**
+ * DESTROY FORM
+ * route: /destroy-form
+ * name: destroy.form
+ */
+Route::delete('/destroy-form/{post}', [LandingController::class, 'destroy'])->name('destroy.form');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

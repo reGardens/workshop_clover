@@ -1,56 +1,112 @@
-import React from "react";
+import { Link, useForm } from "@inertiajs/react";
+import React, { useState } from "react";
 
 const CreateContent = () => {
+    const { data, setData, errors, post, progress } = useForm({
+        title: "",
+        banner: null,
+        narasumber: "",
+        date: "",
+        description: "",
+        short_description: "",
+    });
+
+    const storePost = async (e) => {
+        e.preventDefault();
+        post(route("store.content"));
+    };
+
     return (
         <div className="w-full h-screen flex justify-center items-center">
-            {/* <Form > */}
-            <div className="p-3 shadow-[0_0_10px_1px_rgba(0,0,0,0.1)] grid gap-3 rounded-sm">
-                <label htmlFor="title">title</label>
-                <input
-                    type="text"
-                    name="title"
-                    className="w-[30rem] rounded-sm"
-                />
+            <form name="createForm" onSubmit={storePost}>
+                <div className="p-3 shadow-[0_0_10px_1px_rgba(0,0,0,0.1)] grid gap-3 rounded-sm">
+                    <div className="w-full flex justify-start items-end text-white">
+                        <Link href={route("landing")}>
+                            <button
+                                type="submit"
+                                className="py-1 px-3 bg-blue-500 rounded-md"
+                            >
+                                Back
+                            </button>
+                        </Link>
+                    </div>
 
-                <label htmlFor="banner">Select Image</label>
-                <input
-                    type="image"
-                    name=""
-                    id=""
-                    className="w-[30rem] rounded-sm"
-                />
+                    <label>title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        // value={data.title}
+                        className="w-[30rem] rounded-sm"
+                        onChange={(e) => setData("title", e.target.value)}
+                    />
 
-                <label htmlFor="narasumber">Narasumber</label>
-                <input
-                    type="text"
-                    name="narasumber"
-                    className="w-[30rem] rounded-sm"
-                />
+                    <label className="block text-sm font-medium text-gray-900">
+                        Upload file
+                    </label>
+                    <input
+                        className="w-[30rem] text-sm text-gray-900 border rounded-sm cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:placeholder-gray-400"
+                        aria-describedby="file_input_help"
+                        id="file_input"
+                        type="file"
+                        name="banner"
+                        onChange={(e) => setData("banner", e.target.files[0])}
+                    />
+                    {progress && (
+                        <progress value={progress.percentage} max="100">
+                            {progress.percentage}%
+                        </progress>
+                    )}
+                    <p
+                        className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                        id="file_input_help"
+                    >
+                        SVG, PNG, JPG or GIF (MAX. 800x400px).
+                    </p>
 
-                <label htmlFor="date">Date</label>
-                <input type="date" className="w-[30rem] rounded-sm" />
+                    <label>Narasumber</label>
+                    <input
+                        type="text"
+                        name="narasumber"
+                        className="w-[30rem] rounded-sm border"
+                        onChange={(e) => setData("narasumber", e.target.value)}
+                    />
 
-                <label htmlFor="description">Description</label>
-                <input
-                    type="text"
-                    name="description"
-                    className="w-[30rem] rounded-sm"
-                />
+                    <label>Date</label>
+                    <input
+                        type="date"
+                        className="w-[30rem] rounded-sm"
+                        name="date"
+                        onChange={(e) => setData("date", e.target.value)}
+                    />
 
-                <label htmlFor="short_description">Short Description</label>
-                <input
-                    type="text"
-                    name="short_description"
-                    className="w-[30rem] rounded-sm"
-                />
+                    <label>Description</label>
+                    <input
+                        type="text"
+                        name="description"
+                        className="w-[30rem] rounded-sm"
+                        onChange={(e) => setData("description", e.target.value)}
+                    />
 
-                <div className="w-full flex justify-end items-end text-white">
-                    <button className="py-1 px-3 bg-blue-500 rounded-md">
-                        Submit
-                    </button>
+                    <label>Short Description</label>
+                    <input
+                        type="text"
+                        name="short_description"
+                        className="w-[30rem] rounded-sm"
+                        onChange={(e) =>
+                            setData("short_description", e.target.value)
+                        }
+                    />
+
+                    <div className="w-full flex justify-end items-end text-white">
+                        <button
+                            type="submit"
+                            className="py-1 px-3 bg-blue-500 rounded-md"
+                        >
+                            Submit
+                        </button>
+                    </div>
                 </div>
-            </div>
-            {/* </Form> */}
+            </form>
         </div>
     );
 };

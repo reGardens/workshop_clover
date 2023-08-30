@@ -12,7 +12,7 @@ class Tag extends Model
     protected $table = 'tags';
 
     protected $fillable = [
-        'ttile', 'slug'
+        'title', 'slug'
     ];
 
     public function post()

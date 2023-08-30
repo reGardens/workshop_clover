@@ -21,7 +21,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->title(),
             'slug' => fake()->slug(),
-            'banner' => fake()->sha1(),
+            'banner' => fake()->imageUrl(640, 480, 'animals', true),
             'narasumber' => fake()->firstName(),
             'date' => fake()->date(),
             'description' => fake()->paragraph(),
