@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('cascade')->onDelete('set null');
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->text('banner')->nullable();
+            $table->string('narasumber');
+            $table->date('date');
+            $table->text('description');
+            $table->text('short_description');
             $table->timestamps();
         });
     }
